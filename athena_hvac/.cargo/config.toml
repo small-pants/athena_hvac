@@ -1,0 +1,13 @@
+[target.riscv32imac-unknown-none-elf]
+linker = "/home/jp/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin/rust-lld"
+rustflags = [
+  "-C", "linker-flavor=ld.lld",
+  "-C", "force-frame-pointers",
+]
+runner = "probe-rs run --chip=esp32c6 --preverify --always-print-stacktrace --no-location --catch-hardfault"
+
+[env]
+DEFMT_LOG="info"
+
+[build]
+target = "riscv32imac-unknown-none-elf"
