@@ -19,6 +19,7 @@ esp-bootloader-esp-idf = { version = "0.4.0", features = ["defmt", "esp32c6"] }
 critical-section = "1.2.0"
 rtt-target = { version = "0.6.2", features = ["defmt"] }
 smart-leds = "0.4.0"
+nb = "1.1.0"
 
 [dev-dependencies]
 embedded-test = { version = "0.7.0", features = ["defmt"] }

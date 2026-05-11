@@ -1,16 +1,12 @@
 #![no_std]
 
-// INPUTS
-//  - Temperature Dial
-//  - Defrost Switch
-//  - Dash (Center) Switch
-//  - Footwell Switch
-//  - Off Switch
-//  - Auto Switch
-//  - Recirculate Switch
-//  - Fan Speed Dial
-//  - Cabin Temp Sensor
-//  - HVAC Temp Sensor
+pub mod blower;
+pub mod display;
+pub mod inputs;
+pub mod sensors;
+pub mod solenoids;
+pub mod state;
+
 
 // OUTPUTS
 //  - Recirculate Flap Pod Solenoid

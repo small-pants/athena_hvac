@@ -11,6 +11,7 @@ dependencies = [
  "embedded-test",
  "esp-bootloader-esp-idf",
  "esp-hal",
+ "nb 1.1.0",
  "rtt-target",
  "smart-leds",
 ]
