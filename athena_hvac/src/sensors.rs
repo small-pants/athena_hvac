@@ -1,11 +1,7 @@
-// src/sensors.rs
 use esp_hal::analog::adc::{Adc, AdcCalCurve, AdcConfig, AdcPin, Attenuation};
 use esp_hal::peripherals::ADC1;
 
 use crate::state::HVACState;
-
-//  - Cabin Temp Sensor
-//  - HVAC Temp Sensor
 
 pub struct Sensors<'d, CabinPin, EvapPin, TempDialPin, BlowerDialPin>
 where
@@ -75,7 +71,7 @@ where
             state.output_temp = mv_to_celsius(mv);
         }
         if let Ok(mv) = nb::block!(self.adc.read_oneshot(&mut self.temp_dial_pin)) {
-            // Map 0-3300mV to your temperature setpoint range e.g. 16-30°C
+            // Map 0-3300mV to temperature setpoint range e.g. 16-30°C
             state.set_point = map_range(mv, 0, 3300, 16, 30);
         }
         if let Ok(mv) = nb::block!(self.adc.read_oneshot(&mut self.blower_dial_pin)) {
@@ -86,11 +82,17 @@ where
 }
 
 /// Convert NTC thermistor millivolt reading to Celsius
-fn mv_to_celsius(mv: u16) -> f32 {
-    (mv as f32 - 500.0) / 10.0
+fn mv_to_celsius(mv: u16) -> i32 {
+    (mv as i32 - 500) / 10
 }
 
-fn map_range(val: u16, in_min: u16, in_max: u16, out_min: i32, out_max: i32) -> i32 {
+fn map_range(
+    val: u16,
+    in_min: u16,
+    in_max: u16,
+    out_min: i32,
+    out_max: i32
+) -> i32 {
     let val = val.clamp(in_min, in_max);
     out_min + (val - in_min) as i32 * (out_max - out_min) / (in_max - in_min) as i32
 }
